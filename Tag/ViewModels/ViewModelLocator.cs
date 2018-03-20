@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Alkl.WinTag.Models;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using Tag.Models;
+using System.Windows;
 
-namespace Tag.ViewModels
+namespace Alkl.WinTag.ViewModels
 {
     internal class ViewModelLocator
     {
@@ -18,9 +13,12 @@ namespace Tag.ViewModels
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<IPersistanceModel, JsonFileModel>();
+            SimpleIoc.Default.Register<ITagsModel, TagManager>();
+
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<TagCloudViewModel>();
             SimpleIoc.Default.Register<FileListViewModel>();
+
             Messenger.Default.Register<NotificationMessage>(this, NotifyUserMethod);
         }
 

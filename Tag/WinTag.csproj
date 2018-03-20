@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F838278D-D1B7-4AF5-9217-FD52ED872F65}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Tag</RootNamespace>
-    <AssemblyName>Tag</AssemblyName>
+    <RootNamespace>Alkl.WinTag</RootNamespace>
+    <AssemblyName>WinTag</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -80,12 +80,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BusinessObjects\File.cs" />
+    <Compile Include="BusinessObjects\FileComparer.cs" />
     <Compile Include="BusinessObjects\Folder.cs" />
+    <Compile Include="BusinessObjects\Tag.cs" />
+    <Compile Include="Models\BasicPersistance.cs" />
+    <Compile Include="Models\FileChangedEventArgs.cs" />
+    <Compile Include="Models\FilesChangedEventArgs.cs" />
+    <Compile Include="Models\ITagsModel.cs" />
     <Compile Include="Models\JsonFileModel.cs" />
     <Compile Include="Models\IPersistanceModel.cs" />
-    <Compile Include="BusinessObjects\Tag.cs" />
     <Compile Include="ViewModels\FileListViewModel.cs" />
     <Compile Include="ViewModels\TagCloudViewModel.cs" />
+    <Compile Include="ViewModels\FileViewModel.cs" />
+    <Compile Include="ViewModels\TagViewModel.cs" />
     <Compile Include="Views\TagCloudView.xaml.cs">
       <DependentUpon>TagCloudView.xaml</DependentUpon>
     </Compile>

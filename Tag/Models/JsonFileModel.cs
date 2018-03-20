@@ -1,93 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GalaSoft.MvvmLight;
+﻿using Alkl.WinTag.BusinessObjects;
 using Newtonsoft.Json;
-using Tag.BusinessObjects;
+using System.Collections.Generic;
+using File = Alkl.WinTag.BusinessObjects.File;
 
-namespace Tag.Models
+namespace Alkl.WinTag.Models
 {
-    internal class JsonFileModel : IPersistanceModel
+    internal class JsonFileModel : BasicPersistance
     {
-        private List<File> _files;
+        private const string DataFileName = "tags.wintag";
 
-        private readonly object _fileLock = new object();
-
-        private readonly string _jsonFileName;
-
-        public JsonFileModel()
+        protected override IEnumerable<File> ReadData(string path)
         {
-            _jsonFileName = ".tags";
+            var filename = System.IO.Path.Combine(path, DataFileName);
 
-            ReadFile();
+            if (!System.IO.File.Exists(filename))
+                System.IO.File.WriteAllText(filename, string.Empty);
+
+            var content = System.IO.File.ReadAllText(filename);
+            var folder = JsonConvert.DeserializeObject<Folder>(content) ?? new Folder();
+            
+            return folder.Files;
         }
 
-        public void AddTag(string fileName, string tag)
+        protected override void WriteData(string path, IEnumerable<File> data)
         {
-            ReadFile();
-
-            var file = _files.SingleOrDefault(f => f.Name == fileName);
-            if (!file.Tags.Contains(tag)) file.Tags.Add(tag);
+            var filename = System.IO.Path.Combine(path, DataFileName);
+            var folder = new Folder {Files = new List<File>(data)};
+            var content = JsonConvert.SerializeObject(folder);
+            System.IO.File.WriteAllText(filename, content);
         }
 
-        public List<BusinessObjects.Tag> GetTags()
-        {
-            ReadFile();
-
-            var tags = _files.SelectMany(f => f.Tags).ToList();
-            return tags.Distinct().Select(d => new BusinessObjects.Tag
-            {
-                Name = d,
-                Count = tags.Count(t => t == d)
-            }).ToList();
-        }
-
-        public void AddFiles(IEnumerable<string> fileNames)
-        {
-            ReadFile();
-
-            foreach (var fileName in fileNames)
-            {
-
-
-                if (_files.All(f => f.Name != fileName))
-                {
-                    _files.Add(new File {Name = fileName});
-                }
-            }
-
-            WriteFile();
-        }
-
-        public List<File> GetFiles()
-        {
-            ReadFile();
-            return _files;
-        } 
-
-        private void ReadFile()
-        {
-            lock (_fileLock)
-            {
-                if (!System.IO.File.Exists(_jsonFileName))
-                {
-                    WriteFile();
-                }
-
-                var content = System.IO.File.ReadAllText(_jsonFileName);
-                _files = JsonConvert.DeserializeObject<List<File>>(content) ?? new List<File>();
-            }
-        }
-
-        private void WriteFile()
-        {
-            lock (_fileLock)
-            {
-                var content = JsonConvert.SerializeObject(_files);
-                System.IO.File.WriteAllText(_jsonFileName, content);
-            }
-        }
     }
 }

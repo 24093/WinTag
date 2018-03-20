@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Tag.Views
+namespace Alkl.WinTag.Views
 {
     public partial class TagCloudView : UserControl
     {

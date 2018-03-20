@@ -1,18 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using Alkl.WinTag.Models;
 using GalaSoft.MvvmLight;
-using Tag.Models;
+using GalaSoft.MvvmLight.CommandWpf;
 
-namespace Tag.ViewModels
+namespace Alkl.WinTag.ViewModels
 {
     internal class TagCloudViewModel : ViewModelBase
     {
-        public TagCloudViewModel(IPersistanceModel persistanceModel)
-        {
+        private readonly ITagsModel _tagsModel;
 
+        public ICommand AddCommand { get; }
+
+        public ObservableCollection<TagViewModel> Tags { get; } = new ObservableCollection<TagViewModel>();
+
+        public TagCloudViewModel(ITagsModel tagsModel)
+        {
+            _tagsModel = tagsModel;
+
+            foreach (var tag in _tagsModel.Tags)
+            {
+                Tags.Add(new TagViewModel(tag));
+            }
+
+            AddCommand = new RelayCommand<string>(ExecuteAddCommand);
+        }
+
+        private void ExecuteAddCommand(string tagName)
+        {
+            _tagsModel.AddTag(tagName);
         }
     }
 }

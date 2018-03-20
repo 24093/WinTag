@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
-using Tag.BusinessObjects;
+﻿using System;
 
-namespace Tag.Models
+namespace Alkl.WinTag.Models
 {
     internal interface IPersistanceModel
     {
+        event EventHandler<FilesChangedEventArgs> FilesChanged;
+
+        event EventHandler<FileChangedEventArgs> FileChanged;
+        
         void AddTag(string fileName, string tag);
 
-        List<BusinessObjects.Tag> GetTags();
+        void RemoveTag(string fileName, string tag);
 
-        void AddFiles(IEnumerable<string> fileNames);
-        
-        List<File> GetFiles();
+        void Load(string path);
     }
 }

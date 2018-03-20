@@ -1,8 +1,8 @@
-﻿<Application x:Class="Tag.App"
+﻿<Application x:Class="Alkl.WinTag.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Tag"
-             xmlns:vm="clr-namespace:Tag.ViewModels"
+             xmlns:local="clr-namespace:Alkl.WinTag"
+             xmlns:vm="clr-namespace:Alkl.WinTag.ViewModels"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
         <vm:ViewModelLocator x:Key="Locator" />

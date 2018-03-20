@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27428.2002
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tag", "Tag\Tag.csproj", "{F838278D-D1B7-4AF5-9217-FD52ED872F65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinTag", "Tag\WinTag.csproj", "{F838278D-D1B7-4AF5-9217-FD52ED872F65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace Tag.BusinessObjects
+namespace Alkl.WinTag.BusinessObjects
 {
     internal class File
     {
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
 
         public List<string> Tags { get; set; } = new List<string>();
     }

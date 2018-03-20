@@ -1,9 +1,9 @@
-﻿namespace Tag.BusinessObjects
+﻿namespace Alkl.WinTag.BusinessObjects
 {
     internal class Tag
     {
-        public string Name { get; set; } = string.Empty;
+        public string Text { get; set; }
 
-        public int Count { get; set; } = 0;
+        public int Count { get; set; }
     }
 }

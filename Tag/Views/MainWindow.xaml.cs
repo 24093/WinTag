@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Tag
+namespace Alkl.WinTag
 {
     public partial class MainWindow : Window
     {
